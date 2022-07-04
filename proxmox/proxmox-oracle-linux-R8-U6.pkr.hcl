@@ -19,6 +19,9 @@ variable "http_ip" {
   type    = string
 }
 
+variable "netmaker_token" {
+  type    = string
+}
 # The "legacy_isotime" function has been provided for backwards compatability, but we recommend switching to the timestamp and formatdate functions.
 
 # source blocks are generated from your builders; a source can be referenced in
@@ -28,7 +31,7 @@ variable "http_ip" {
 source "proxmox" "oracle_linux_R8_U6_x86_64" {
   boot_command        = [
     "<tab>",
-    " inst.text inst.ks=https://raw.githubusercontent.com/calebgasser/proxmox-packer/develop/http/Oracle-Linux-R8-U6-x86_64/ks.cfg",
+    " inst.text inst.sshd inst.ks=https://raw.githubusercontent.com/calebgasser/proxmox-packer/develop/http/Oracle-Linux-R8-U6-x86_64/ks.cfg TOKEN=${var.netmaker_token}",
     "<enter>",
     "<wait>"
   ]
