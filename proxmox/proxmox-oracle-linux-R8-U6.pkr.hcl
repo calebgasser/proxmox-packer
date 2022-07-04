@@ -28,7 +28,7 @@ variable "http_ip" {
 source "proxmox" "oracle_linux_R8_U6_x86_64" {
   boot_command        = [
     "<tab>",
-    " text inst.ks=http://${var.http_ip}:{{ .HTTPPort }}/ks.cfg",
+    " inst.text inst.ks=https://raw.githubusercontent.com/calebgasser/proxmox-packer/develop/http/Oracle-Linux-R8-U6-x86_64/ks.cfg",
     "<enter>",
     "<wait>"
   ]
