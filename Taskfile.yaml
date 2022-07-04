@@ -1,0 +1,30 @@
+version: "3"
+
+dotenv: [".env"]
+
+env:
+  PKR_VAR_http_ip:
+    sh: ip -4 -o addr show wg0 | awk '{print $4}' | cut -d "/" -f 1
+
+tasks:
+
+  proxmox:ol:r8:init:
+    desc: Build kvm image of Oracle Linux R8 U6.
+    cmds:
+      - packer init proxmox/proxmox-oracle-linux-R8-U6.pkr.hcl
+
+  proxmox:ol:r8:
+    deps: [proxmox:ol:r8:init]
+    desc: Build kvm image of Oracle Linux R8 U6.
+    cmds:
+      - packer build proxmox/proxmox-oracle-linux-R8-U6.pkr.hcl
+
+  kvm:ol:r8:
+    desc: Build kvm image of Oracle Linux R8 U6.
+    cmds:
+      - packer build kvm/kvm-oracle-linux-R8-U6.pkr.hcl
+
+  convert:
+    desc: Convert from JSON to HCL2. Example `task convert -- my-file.json`
+    cmds:
+      - packer hcl2_upgrade -with-annotations {{.CLI_ARGS}}
