@@ -35,11 +35,12 @@ source "proxmox" "oracle_linux_R8_U6_x86_64" {
   boot_wait           = "10s"
   memory              = "4096"
   cores               = 2
+  scsi_controller     = "virtio-scsi-pci"
   disks {
     disk_size         = "32G"
     storage_pool      = "local-lvm"
     storage_pool_type = "lvm"
-    type              = "scsi"
+    type              = "virtio"
   }
   http_directory           = "http/Oracle-Linux-R8-U6-x86_64"
   insecure_skip_tls_verify = true
