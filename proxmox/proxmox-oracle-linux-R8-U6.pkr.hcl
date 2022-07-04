@@ -53,7 +53,7 @@ source "proxmox" "oracle_linux_R8_U6_x86_64" {
   proxmox_url          = "https://10.1.0.6:8006/api2/json"
   ssh_password         = "packer"
   ssh_timeout          = "30m"
-  ssh_username         = "root"
+  ssh_username         = "packer"
   template_description = "Oracle Linux R8 U6, generated on ${legacy_isotime("2006-01-02T15:04:05Z")}"
   template_name        = "oracle-linux"
   unmount_iso          = true
